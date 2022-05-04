@@ -8,7 +8,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   // refactor...
-  if (b === 0){
+  if (b === 0) {
     return null;
   }
   // ... refactor
@@ -21,4 +21,6 @@ function cylinderVol(r, a) {
   // ... refactor
 }
 
-module.exports = {sum, multiply, divide, cylinderVol};
+module.exports = {
+  sum, multiply, divide, cylinderVol,
+};
