@@ -1,4 +1,3 @@
-
 // describe reune un conjunto de bruebas, mejora la lectura del código y la encapsulación.
 describe('gruop 1', () => {
   // beforeAll es una sentencia [setup] que corre antes de todas las pruebas xej up db
