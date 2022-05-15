@@ -37,7 +37,7 @@ jobs:
           node-version: 14
           cache: 'npm'
           # No olvidar esa linea esencial para monorepos.
-          cache-dependency-path: ./api/package-lock.json.json
+          cache-dependency-path: ./api/package-lock.json
       # Instalar dependencias.
       - name: install
       - shell: bash
