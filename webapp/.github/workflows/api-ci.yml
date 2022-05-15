@@ -49,7 +49,7 @@ jobs:
           run: npm run test
         # Correr pruebas estáticas.
         - name: run linter
-        shell: bash
-        run: npm run lint
+          shell: bash
+          run: npm run lint
 
 # Creé la rama hub para probar el tester de github.
