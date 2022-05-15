@@ -24,7 +24,7 @@ defaults:
 # Con esto se le dice a github que no use nuestra maquina de Jest si no su maquina remota.
 
 jobs:
-  linter:
+  # linter:
     unit-test:
       runs-on: ubuntu-latest
         steps:
@@ -42,14 +42,15 @@ jobs:
         # Instalar dependencias.
         - name: install
           shell: bash
-          run: npm ci # Comando para instalar dependencias en un entorno de integración continua.
+          # Comando para instalar dependencias en un entorno de integración continua.
+          run: npm ci
         # Correr las pruebas en automático.
         - name: run unit test
           shell: bash
           run: npm run test
         # Correr pruebas estáticas.
-        - name: run linter
-          shell: bash
-          run: npm run lint
+        # - name: run linter
+         # shell: bash
+         # run: npm run lint
 
 # Creé la rama hub para probar el tester de github.
