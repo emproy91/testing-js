@@ -8,13 +8,14 @@ name: API CI
 on:
   push:
     paths:
-
-      - "./api/**"  # Que haga push solo cuando hay cambios en api o en este mismo archivo.
+    # Que haga push solo cuando hay cambios en api o en este mismo archivo.
+      - "./api/**"
       - ".github/workflows/api-ci.yml"
 
 
 defaults:
-  run:  # Trabaje en un directorio básico.
+  run:
+  # Trabaje en un directorio básico.
     working-directory: ./api
 
 # ... Para un proyecro sencillo se usa solo on: [push] .
@@ -33,9 +34,10 @@ jobs:
       - name: Setup Nodejs
       - uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: 14
           cache: 'npm'
-          cache-dependency-path: ./api/package-lock.json # No olvidar esa linea esencial para monorepos.
+          # No olvidar esa linea esencial para monorepos.
+          cache-dependency-path: ./api/package-lock.json.json
       # Instalar dependencias.
       - name: install
       - shell: bash
