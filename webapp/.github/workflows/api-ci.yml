@@ -41,6 +41,6 @@ jobs:
       - shell: bash
       - run: npm ci # Comando para instalar dependencias en un entorno de integración continua.
       # Correr las pruebas en automático.
-      - name: run unit unit-test
+      - name: run unit test
       - shell: bash
       - run: npm run test
