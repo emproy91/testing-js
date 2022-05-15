@@ -104,3 +104,4 @@ jobs:
       # MONGO_URL antes apuntaba al @localhost, en actions debe apuntar al servicio creado @mongo-e2e.
       # No está de más revisar las clves de acceso en la url.
           MONGO_URL: mongodb://test:test123@mongo-e2e:27017?retryWrites=true&writeConcern=majority
+# Fuente:  https://github.com/platzi/curso-testing-js/blob/step-18/.github/workflows/api-ci.yml
