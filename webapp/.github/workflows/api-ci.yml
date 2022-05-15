@@ -35,4 +35,12 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-          cache-dependency-path: ./api/package-lock.json
+          cache-dependency-path: ./api/package-lock.json # No olvidar esa linea esencial para monorepos.
+      # Instalar dependencias.
+      - name: install
+      - shell: bash
+      - run: npm ci # Comando para instalar dependencias en un entorno de integración continua.
+      # Correr las pruebas en automático.
+      - name: run unit unit-test
+      - shell: bash
+      - run: npm run test
