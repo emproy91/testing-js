@@ -1,56 +1,33 @@
 
-# Ciclo de integración continuo.
 name: API CI
-# Cada que se haga un commit corra este ciclo, es solo para proyectos simples, no monorepos como este.
-# on: [push]
 
-# Como este proyecto es un monorepo usaremos lo siguiente ...
+#on: [push]
 on:
   push:
     paths:
-    # Que haga push solo cuando hay cambios en api o en este mismo archivo.
       - "./api/**"
       - ".github/workflows/api-ci.yml"
 
 
 defaults:
   run:
-  # Trabaje en un directorio básico.
     working-directory: ./api
 
-# ... Para un proyecro sencillo se usa solo on: [push] .
-
-# Jobs son las formas y parámetros de automatizar pruebas de github.
-# Con esto se le dice a github que no use nuestra maquina de Jest si no su maquina remota.
-
 jobs:
-  linter:
-    unit-test:
-      runs-on: ubuntu-latest
-      steps:
-        # Clonar repo en la rama que esté.
-        - name: Checkout
-          uses: actions/checkout@v2
-        # Configure node.
-        - name: Setup Nodejs
-          uses: actions/setup-node@v2
-          with:
-            node-version: 14
-            cache: 'npm'
-            # No olvidar esa linea esencial para monorepos.
-            cache-dependency-path: ./api/package-lock.json
-        # Instalar dependencias.
-        - name: install
-          shell: bash
-          # Comando para instalar dependencias en un entorno de integración continua.
-          run: npm ci
-        # Correr las pruebas en automático.
-        - name: run unit test
-          shell: bash
-          run: npm run test
-        # Correr pruebas estáticas.
-        - name: run linter
-          shell: bash
-          run: npm run lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          cache: 'npm'
+          cache-dependency-path: ./api/package-lock.json
+      - name: install
+        shell: bash
+        run: npm ci
 
-# Creé la rama hub para probar el tester de github.
+      - name: run unit test
+        shell: bash
+        run: npm run test
