@@ -8,13 +8,14 @@ name: API CI
 on:
   push:
     paths:
-
-      - "./api/**"  # Que haga push solo cuando hay cambios en api o en este mismo archivo.
+    # Que haga push solo cuando hay cambios en api o en este mismo archivo.
+      - "./api/**"
       - ".github/workflows/api-ci.yml"
 
 
 defaults:
-  run:  # Trabaje en un directorio básico.
+  run:
+  # Trabaje en un directorio básico.
     working-directory: ./api
 
 # ... Para un proyecro sencillo se usa solo on: [push] .
@@ -23,25 +24,32 @@ defaults:
 # Con esto se le dice a github que no use nuestra maquina de Jest si no su maquina remota.
 
 jobs:
-  unit-test:
-    runs-on: ubuntu-latest
-    steps:
-      # Clonar repo en la rama que esté.
-      - name: Checkout
-      - uses: actions/checkout@v2
-      # Configure node.
-      - name: Setup Nodejs
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
-          cache: 'npm'
-          cache-dependency-path: ./api/package-lock.json # No olvidar esa linea esencial para monorepos.
-      # Instalar dependencias.
-      - name: install
-      - shell: bash
-      - run: npm ci # Comando para instalar dependencias en un entorno de integración continua.
-      # Correr las pruebas en automático.
-      - name: run unit test
-      - shell: bash
-      - run: npm run test
+  linter:
+    unit-test:
+      runs-on: ubuntu-latest
+        steps:
+        # Clonar repo en la rama que esté.
+        - name: Checkout
+          uses: actions/checkout@v2
+        # Configure node.
+        - name: Setup Nodejs
+          uses: actions/setup-node@v2
+          with:
+            node-version: 14
+            cache: 'npm'
+            # No olvidar esa linea esencial para monorepos.
+            cache-dependency-path: ./api/package-lock.json
+        # Instalar dependencias.
+        - name: install
+          shell: bash
+          run: npm ci # Comando para instalar dependencias en un entorno de integración continua.
+        # Correr las pruebas en automático.
+        - name: run unit test
+          shell: bash
+          run: npm run test
+        # Correr pruebas estáticas.
+        - name: run linter
+          shell: bash
+          run: npm run lint
+
 # Creé la rama hub para probar el tester de github.
